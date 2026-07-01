@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "reviews/new"
+  get "reviews/create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: "homes#top"
   get "/about", to: "homes#about"
@@ -13,4 +15,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :comments, only: [:create]
 end

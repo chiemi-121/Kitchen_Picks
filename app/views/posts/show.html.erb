@@ -1,0 +1,28 @@
+<div class="container mt-4">
+
+  <h2><%= @post.title %></h2>
+  <hr>
+
+  <p><%= simple_format(@post.body) %></p>
+
+  <p class="text-muted">
+    評価：<%= "★" * @post.rating %><%= "☆" * (5 - @post.rating) %><br>
+    投稿者：<%= @post.user.name %><br>
+    投稿日時：<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
+  </p>
+
+  <hr>
+
+  <!-- 編集・削除ボタン -->
+  <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary me-2" %>
+
+  <%= link_to "削除する", post_path(@post),
+      method: :delete,
+      data: { confirm: "本当に削除しますか？" },
+      class: "btn btn-danger" %>
+
+  <hr>
+
+  <%= link_to "投稿一覧へ戻る", posts_path, class: "btn btn-secondary" %>
+
+</div>

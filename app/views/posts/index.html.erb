@@ -1,0 +1,43 @@
+<div class="container mt-4">
+
+  <h2>投稿一覧</h2>
+  <p class="text-muted">最新の投稿から順に表示しています。</p>
+  <hr>
+
+  <% @posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body">
+
+        <!-- タイトル（詳細ページへのリンク） -->
+        <h4>
+          <%= link_to post.title, post_path(post), class: "text-decoration-none" %>
+        </h4>
+
+        <!-- 評価 -->
+        <p>
+          評価：
+          <%= "★" * post.rating %>
+          <%= "☆" * (5 - post.rating) %>
+        </p>
+
+        <!-- 本文（先頭だけ表示） -->
+        <p class="text-muted">
+          <%= truncate(post.body, length: 80) %>
+        </p>
+
+        <!-- カテゴリ名（category モデルがある前提） -->
+        <p class="text-muted">
+          カテゴリ：<%= post.category.name if post.category.present? %>
+        </p>
+
+        <!-- 投稿者・日時 -->
+        <p class="text-muted">
+          投稿者：<%= post.user.name %><br>
+          投稿日時：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
+        </p>
+
+      </div>
+    </div>
+  <% end %>
+
+</div>

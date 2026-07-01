@@ -1,0 +1,26 @@
+<div class="container mt-4">
+
+  <h2>レビュー投稿</h2>
+  <p>キッチン便利グッズのレビューを投稿しましょう。</p>
+  <hr>
+
+  <%= form_with model: @review, local: true do |f| %>
+
+    <!-- タイトル -->
+    <div class="mb-3">
+      <%= f.label :title, "タイトル", class: "form-label" %>
+      <%= f.text_field :title, class: "form-control", placeholder: "例：買ってよかったキッチンバサミ" %>
+    </div>
+
+    <!-- 本文 -->
+    <div class="mb-3">
+      <%= f.label :body, "レビュー内容", class: "form-label" %>
+      <%= f.text_area :body, class: "form-control", rows: 6, placeholder: "使ってみた感想を書いてください" %>
+    </div>
+
+    <!-- 送信ボタン -->
+    <%= f.submit "投稿する", class: "btn btn-primary" %>
+
+  <% end %>
+
+</div>
