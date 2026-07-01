@@ -1,0 +1,36 @@
+<div class="container mt-4">
+
+  <h2>Kitchen Picks へようこそ！</h2>
+  <p>キッチン便利グッズのレビュー投稿アプリです。</p>
+
+  <hr>
+
+  <h3>新着レビュー</h3>
+  <div class="d-flex gap-3 flex-wrap">
+    <% @latest_reviews.each do |review| %>
+      <div class="card" style="width: 14rem;">
+        <div class="card-body">
+          <p class="card-text"><%= review.title %></p>
+          <p class="text-muted"><%= review.user.name %> さん</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
+
+  <h3>人気アイテム</h3>
+  <div class="d-flex gap-3 flex-wrap">
+    <% @popular_items.each do |item| %>
+      <div class="card" style="width: 14rem;">
+        <% if item.image.attached? %>
+          <%= image_tag item.image, class: "card-img-top" %>
+        <% end %>
+        <div class="card-body">
+          <p class="card-text"><%= item.name %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
