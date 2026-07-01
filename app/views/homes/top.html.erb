@@ -1,36 +1,46 @@
 <div class="container mt-4">
 
   <h2>Kitchen Picks へようこそ！</h2>
-  <p>キッチン便利グッズのレビュー投稿アプリです。</p>
+  <p class="text-muted">
+    キッチン便利グッズのレビュー・投稿アプリです。  
+    気に入ったアイテムの使い心地を共有しましょう。
+  </p>
 
   <hr>
 
-  <h3>新着レビュー</h3>
-  <div class="d-flex gap-3 flex-wrap">
-    <% @latest_reviews.each do |review| %>
-      <div class="card" style="width: 14rem;">
-        <div class="card-body">
-          <p class="card-text"><%= review.title %></p>
-          <p class="text-muted"><%= review.user.name %> さん</p>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <div class="mt-4">
 
-  <hr>
+    <h4>メニュー</h4>
 
-  <h3>人気アイテム</h3>
-  <div class="d-flex gap-3 flex-wrap">
-    <% @popular_items.each do |item| %>
-      <div class="card" style="width: 14rem;">
-        <% if item.image.attached? %>
-          <%= image_tag item.image, class: "card-img-top" %>
-        <% end %>
-        <div class="card-body">
-          <p class="card-text"><%= item.name %></p>
-        </div>
-      </div>
-    <% end %>
+    <ul class="list-group">
+
+      <li class="list-group-item">
+        <%= link_to "投稿一覧を見る", posts_path, class: "text-decoration-none" %>
+      </li>
+
+      <li class="list-group-item">
+        <%= link_to "新規投稿する", new_post_path, class: "text-decoration-none" %>
+      </li>
+
+      <% if user_signed_in? %>
+        <li class="list-group-item">
+          <%= link_to "マイページへ", user_path(current_user), class: "text-decoration-none" %>
+        </li>
+      <% else %>
+        <li class="list-group-item">
+          <%= link_to "ログインする", login_path, class: "text-decoration-none" %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "新規登録する", signup_path, class: "text-decoration-none" %>
+        </li>
+      <% end %>
+
+      <li class="list-group-item">
+        <%= link_to "About（アバウト）", about_path, class: "text-decoration-none" %>
+      </li>
+
+    </ul>
+
   </div>
 
 </div>
