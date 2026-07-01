@@ -10,14 +10,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    # パスワードを SHA256 で暗号化して保存
-    @user.encrypted_password = Digest::SHA256.hexdigest(params[:user][:password])
-
     if @user.save
       session[:user_id] = @user.id
       redirect_to mypage_path, notice: "登録が完了しました！"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -36,12 +33,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    # パスワード変更がある場合のみ暗号化
+    # パスワード変更がある場合のみ暗号化して保存
     if params[:user][:password].present?
       @user.encrypted_password = Digest::SHA256.hexdigest(params[:user][:password])
     end
 
-    if @user.update(user_params.except(:password))
+    # user_params は name と email のみ
+    if @user.update(user_params)
       redirect_to @user, notice: "プロフィールを更新しました！"
     else
       render :edit
@@ -66,6 +64,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

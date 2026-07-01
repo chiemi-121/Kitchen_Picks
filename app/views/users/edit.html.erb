@@ -1,0 +1,37 @@
+<div class="container mt-4">
+
+  <h2>プロフィール編集</h2>
+
+  <hr>
+
+  <%= form_with model: @user, local: true do |f| %>
+
+    <div class="mb-3">
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password, "新しいパスワード（変更する場合のみ）" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password_confirmation, "パスワード確認" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+
+    <%= f.submit "更新する", class: "btn btn-primary" %>
+
+  <% end %>
+
+  <hr>
+
+  <%= link_to "マイページへ戻る", mypage_path, class: "btn btn-outline-secondary" %>
+
+</div>

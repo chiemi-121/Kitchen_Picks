@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_01_024334) do
+ActiveRecord::Schema[8.0].define(version: 2026_07_01_063116) do
   create_table "comments", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "user_id", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_01_024334) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password"
   end
 
   add_foreign_key "comments", "posts"

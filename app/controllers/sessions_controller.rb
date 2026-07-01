@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
 
-    if user && user.encrypted_password == Digest::SHA256.hexdigest(params[:password])
+    if user&.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to mypage_path, notice: "ログインしました！"
     else
