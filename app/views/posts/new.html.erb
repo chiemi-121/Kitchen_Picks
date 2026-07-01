@@ -1,26 +1,25 @@
-<div class="container mt-4">
+<h2>レビュー投稿</h2>
 
-  <h2>レビュー投稿</h2>
-  <p>キッチン便利グッズのレビューを投稿しましょう。</p>
-  <hr>
+<p>キッチン便利グッズのレビューを投稿しましょう。</p>
 
-  <%= form_with model: @post, local: true do |f| %>
+<%= form_with model: @post, local: true do |f| %>
 
-    <!-- タイトル -->
-    <div class="mb-3">
-      <%= f.label :title, "タイトル", class: "form-label" %>
-      <%= f.text_field :title, class: "form-control", placeholder: "例：買ってよかったキッチンバサミ" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
 
-    <!-- 本文 -->
-    <div class="mb-3">
-      <%= f.label :body, "レビュー内容", class: "form-label" %>
-      <%= f.text_area :body, class: "form-control", rows: 6, placeholder: "使ってみた感想を書いてください" %>
-    </div>
+  <div class="mb-3">
+    <%= f.label :body, "レビュー内容" %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
 
-    <!-- 送信ボタン -->
-    <%= f.submit "投稿する", class: "btn btn-primary" %>
+  <!-- 🔥 これが絶対必要！ -->
+  <div class="mb-3">
+    <%= f.label :category_id, "カテゴリー" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "選択してください", class: "form-select" %>
+  </div>
 
-  <% end %>
+  <%= f.submit "投稿する", class: "btn btn-primary" %>
 
-</div>
+<% end %>

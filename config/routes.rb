@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "categories/index"
+  get "categories/show"
   root to: "homes#top"
   get "/about", to: "homes#about"
 
@@ -19,6 +21,9 @@ Rails.application.routes.draw do
 
   # コメント
   resources :comments, only: [:create]
+
+  # カテゴリ
+  resources :categories, only: [:index, :show]
 
   # ユーザー詳細・編集・退会
   resources :users, only: [:show, :edit, :update, :destroy]
