@@ -5,6 +5,18 @@
 
   <p><%= simple_format(@post.body) %></p>
 
+  <!-- ★ カテゴリ表示 -->
+  <p><strong>カテゴリー：</strong> <%= @post.category.name %></p>
+
+  <!-- ★ ジャンル表示（リンク付き・複数） -->
+  <p><strong>ジャンル：</strong>
+    <% @post.tags.each do |tag| %>
+      <%= link_to tag_path(tag), class: "text-decoration-none" do %>
+        <span class="badge bg-primary"><%= tag.name %></span>
+      <% end %>
+    <% end %>
+  </p>
+
   <p class="text-muted">
     評価：<%= "★" * @post.rating %><%= "☆" * (5 - @post.rating) %><br>
     投稿者：<%= @post.user.name %><br>

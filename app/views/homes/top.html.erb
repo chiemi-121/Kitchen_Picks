@@ -6,15 +6,23 @@
     気に入ったアイテムの使い心地を共有しましょう。
   </p>
 
-  <% if user_signed_in? %>
-    <!-- ログイン済みなら投稿一覧へ -->
-    <%= link_to "投稿一覧へ", posts_path, class: "btn btn-primary btn-lg me-3" %>
-    <%= link_to "マイページへ", mypage_path, class: "btn btn-outline-secondary btn-lg" %>
+  <% unless user_signed_in? %>
+    <div class="d-flex justify-content-center gap-3">
 
-  <% else %>
-    <!-- 未ログインなら Sign up / Log in の2ボタンだけ -->
-    <%= link_to "新規登録（Sign up）", signup_path, class: "btn btn-success btn-lg me-3" %>
-    <%= link_to "ログイン（Log in）", login_path, class: "btn btn-outline-primary btn-lg" %>
+      <!-- Sign up -->
+      <%= link_to "新規登録", signup_path,
+          class: "btn btn-primary btn-lg rounded-pill px-4" %>
+
+      <!-- Log in -->
+      <%= link_to "ログイン", login_path,
+          class: "btn btn-outline-primary btn-lg rounded-pill px-4" %>
+
+      <!-- Guest login -->
+      <%= button_to "ゲストログイン", guest_login_path,
+          method: :post,
+          class: "btn btn-warning btn-lg rounded-pill px-4" %>
+
+    </div>
   <% end %>
 
 </div>

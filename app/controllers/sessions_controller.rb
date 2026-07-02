@@ -14,6 +14,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def guest_login
+    user = User.find_by(email: "guest@example.com")
+    session[:user_id] = user.id
+    redirect_to posts_path, notice: "ゲストとしてログインしました"
+  end
+
   def destroy
     session.delete(:user_id)
     redirect_to root_path, notice: "ログアウトしました"

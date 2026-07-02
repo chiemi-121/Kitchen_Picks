@@ -1,10 +1,16 @@
 class HomesController < ApplicationController
-  layout "top", only: [:top]
+  layout :choose_layout
 
   def top
-    # トップページは案内ページなのでデータは不要
   end
 
-  def about
+  private
+
+  def choose_layout
+    if user_signed_in?
+      "application"   # ログイン後 → 共通ヘッダー（投稿一覧・新規投稿・マイページ・ログアウト）
+    else
+      "top"           # 未ログイン → Sign up / Log in の専用ヘッダー
+    end
   end
 end

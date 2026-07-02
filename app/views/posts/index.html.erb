@@ -25,9 +25,18 @@
           <%= truncate(post.body, length: 80) %>
         </p>
 
-        <!-- カテゴリ名（category モデルがある前提） -->
+        <!-- カテゴリ名 -->
         <p class="text-muted">
           カテゴリ：<%= post.category.name if post.category.present? %>
+        </p>
+
+        <!-- ★ ジャンル badge（リンク付き・複数） -->
+        <p>
+          <% post.tags.each do |tag| %>
+            <%= link_to tag_path(tag), class: "text-decoration-none" do %>
+              <span class="badge bg-primary"><%= tag.name %></span>
+            <% end %>
+          <% end %>
         </p>
 
         <!-- 投稿者・日時 -->

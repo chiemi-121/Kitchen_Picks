@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  #ゲストログイン
+  post "/guest_login", to: "sessions#guest_login"
+
   # 投稿
   resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 

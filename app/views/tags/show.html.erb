@@ -1,0 +1,30 @@
+<h2><%= @tag.name %> の投稿一覧</h2>
+
+<p>このジャンルに関連するレビューをまとめています。</p>
+
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text"><%= truncate(post.body, length: 80) %></p>
+
+          <p class="text-muted">
+            カテゴリー：<%= post.category.name %>
+          </p>
+
+          <p>
+            <% post.tags.each do |tag| %>
+              <span class="badge bg-primary"><%= tag.name %></span>
+            <% end %>
+          </p>
+
+          <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "ジャンル一覧に戻る", tags_path, class: "btn btn-secondary mt-3" %>
