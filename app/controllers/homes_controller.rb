@@ -1,8 +1,8 @@
 class HomesController < ApplicationController
+  layout "top", only: [:top]
+
   def top
-    # トップページ表示用データ
-    @latest_posts = Post.order(created_at: :desc).limit(4)
-    #@popular_items = Item.order(favorites_count: :desc).limit(4)
+    # トップページは案内ページなのでデータは不要
   end
 
   def about

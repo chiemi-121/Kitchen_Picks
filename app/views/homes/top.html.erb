@@ -1,46 +1,20 @@
-<div class="container mt-4">
+<div class="text-center mt-5">
 
-  <h2>Kitchen Picks へようこそ！</h2>
-  <p class="text-muted">
-    キッチン便利グッズのレビュー・投稿アプリです。  
+  <h1 class="mb-4">Kitchen Picks へようこそ！</h1>
+  <p class="lead mb-5">
+    キッチン便利グッズのレビュー・投稿アプリです。<br>
     気に入ったアイテムの使い心地を共有しましょう。
   </p>
 
-  <hr>
+  <% if user_signed_in? %>
+    <!-- ログイン済みなら投稿一覧へ -->
+    <%= link_to "投稿一覧へ", posts_path, class: "btn btn-primary btn-lg me-3" %>
+    <%= link_to "マイページへ", mypage_path, class: "btn btn-outline-secondary btn-lg" %>
 
-  <div class="mt-4">
-
-    <h4>メニュー</h4>
-
-    <ul class="list-group">
-
-      <li class="list-group-item">
-        <%= link_to "投稿一覧を見る", posts_path, class: "text-decoration-none" %>
-      </li>
-
-      <li class="list-group-item">
-        <%= link_to "新規投稿する", new_post_path, class: "text-decoration-none" %>
-      </li>
-
-      <% if user_signed_in? %>
-        <li class="list-group-item">
-          <%= link_to "マイページへ", user_path(current_user), class: "text-decoration-none" %>
-        </li>
-      <% else %>
-        <li class="list-group-item">
-          <%= link_to "ログインする", login_path, class: "text-decoration-none" %>
-        </li>
-        <li class="list-group-item">
-          <%= link_to "新規登録する", signup_path, class: "text-decoration-none" %>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <%= link_to "About（アバウト）", about_path, class: "text-decoration-none" %>
-      </li>
-
-    </ul>
-
-  </div>
+  <% else %>
+    <!-- 未ログインなら Sign up / Log in の2ボタンだけ -->
+    <%= link_to "新規登録（Sign up）", signup_path, class: "btn btn-success btn-lg me-3" %>
+    <%= link_to "ログイン（Log in）", login_path, class: "btn btn-outline-primary btn-lg" %>
+  <% end %>
 
 </div>
