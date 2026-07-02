@@ -22,12 +22,15 @@
 
   <div class="mb-3">
     <%= f.label :tag_ids, "ジャンル" %>
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name do |tag| %>
-      <div class="form-check">
-        <%= tag.check_box(class: "form-check-input") %>
-        <%= tag.label(class: "form-check-label") %>
-      </div>
-    <% end %>
+
+    <div class="genre-list">
+      <% Tag.all.each do |tag| %>
+        <label class="genre-item">
+          <%= check_box_tag "post[tag_ids][]", tag.id, @post.tag_ids.include?(tag.id) %>
+          <%= tag.name %>
+        </label>
+      <% end %>
+    </div>
   </div>
 
 
