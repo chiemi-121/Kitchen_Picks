@@ -25,13 +25,15 @@
 
   <hr>
 
-  <!-- 編集・削除ボタン -->
-  <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary me-2" %>
+  <!-- 編集・削除ボタン（ログインユーザーの投稿のみ表示） -->
+  <% if @post.user_id == current_user.id %>
+    <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary me-2" %>
 
-  <%= button_to "削除する", post_path(@post),
-      method: :delete,
-      data: { confirm: "本当に削除しますか？" },
-      class: "btn btn-danger" %>
+    <%= button_to "削除する", post_path(@post),
+        method: :delete,
+        data: { confirm: "本当に削除しますか？" },
+        class: "btn btn-danger" %>
+  <% end %>
 
   <hr>
 

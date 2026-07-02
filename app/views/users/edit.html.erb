@@ -32,6 +32,15 @@
 
   <hr>
 
+  <!-- ★ 退会ボタン（新規登録画面へ遷移） -->
+  <%= link_to "退会する",
+              user_path(@user),
+              method: :delete,
+              data: { confirm: "本当に退会しますか？" },
+              class: "btn btn-danger mt-3" %>
+
+  <hr>
+
   <%= link_to "マイページへ戻る", mypage_path, class: "btn btn-outline-secondary" %>
 
 </div>

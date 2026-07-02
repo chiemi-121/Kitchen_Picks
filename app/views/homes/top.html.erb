@@ -1,6 +1,12 @@
-<div class="text-center mt-5">
+<div class="container text-center mt-5">
 
-  <h1 class="mb-4">Kitchen Picks へようこそ！</h1>
+  <!-- ロゴ画像（上に余白を追加） -->
+  <%= image_tag asset_path("kitchen_picks_logo.png"),
+      alt: "Kitchen Picks ロゴ",
+      class: "logo-img mx-auto d-block mt-5 mb-4" %>
+
+  <h1 class="fw-bold mb-4">Kitchen Picks へようこそ！</h1>
+
   <p class="lead mb-5">
     キッチン便利グッズのレビュー・投稿アプリです。<br>
     気に入ったアイテムの使い心地を共有しましょう。
@@ -9,15 +15,12 @@
   <% unless user_signed_in? %>
     <div class="d-flex justify-content-center gap-3">
 
-      <!-- Sign up -->
       <%= link_to "新規登録", signup_path,
           class: "btn btn-primary btn-lg rounded-pill px-4" %>
 
-      <!-- Log in -->
       <%= link_to "ログイン", login_path,
           class: "btn btn-outline-primary btn-lg rounded-pill px-4" %>
 
-      <!-- Guest login -->
       <%= button_to "ゲストログイン", guest_login_path,
           method: :post,
           class: "btn btn-warning btn-lg rounded-pill px-4" %>

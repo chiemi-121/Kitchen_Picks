@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.order(created_at: :desc)
@@ -15,12 +17,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.rating ||= 3   # ★ 仮の評価を入れる（後で retry で変更）
 
     if @post.save
       redirect_to @post, notice: "投稿しました！"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post, notice: "投稿を更新しました！"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +47,13 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def ensure_correct_user
+    unless @post.user_id == current_user.id
+      redirect_to posts_path, alert: "権限がありません"
+    end
+  end
+
   def post_params
-    params.require(:post).permit(:title, :body, :rating, :category_id, tag_ids: [])
+    params.require(:post).permit(:title, :body, :rating, :category_id)
   end
 end

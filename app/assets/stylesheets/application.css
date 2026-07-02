@@ -20,3 +20,15 @@
   background: #e9ecef;
   border-color: #bbb;
 }
+
+.img-fluid {
+  max-width: 400px;
+  height: auto;
+}
+
+.logo-img {
+  display: block;
+  width: 400px;
+  height: auto;
+  margin-top: 40px;
+}

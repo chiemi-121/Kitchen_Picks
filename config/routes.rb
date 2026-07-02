@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get "categories/index"
-  get "categories/show"
   root to: "homes#top"
   get "/about", to: "homes#about"
 
@@ -16,7 +14,7 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  #ゲストログイン
+  # ゲストログイン
   post "/guest_login", to: "sessions#guest_login"
 
   # 投稿
@@ -25,14 +23,14 @@ Rails.application.routes.draw do
   # コメント
   resources :comments, only: [:create]
 
-  # カテゴリ
+  # カテゴリ（重複ルート削除済み）
   resources :categories, only: [:index, :show]
-
-  # ユーザー詳細・編集・退会
-  resources :users, only: [:show, :edit, :update, :destroy]
 
   # タグ
   resources :tags, only: [:index, :show]
+
+  # ユーザー詳細・編集・退会
+  resources :users, only: [:show, :edit, :update, :destroy]
 
   # ヘルスチェック
   get "up" => "rails/health#show", as: :rails_health_check

@@ -48,9 +48,10 @@ class UsersController < ApplicationController
 
   # 退会
   def destroy
-    @user.destroy
-    reset_session
-    redirect_to root_path, notice: "退会しました。ご利用ありがとうございました！"
+    @user = User.find(params[:id])
+    @user.update(is_active: false)   # 退会フラグ（必要なら）
+    reset_session                    # ログアウト
+    redirect_to signup_path, notice: "退会が完了しました。新規登録できます。"
   end
 
   private
