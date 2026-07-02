@@ -7,3 +7,32 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+tags = [
+  "電子レンジ",
+  "パスタ",
+  "調理器具",
+  "100均",
+  "便利グッズ",
+  "洗い物が減る",
+  "子育て向け",
+  "時短アイテム",
+  "収納グッズ",
+  "キッチン家電",
+  "料理初心者向け",
+  "一人暮らし向け",
+  "お弁当作り",
+  "省スペース",
+  "多機能アイテム",
+  "ダイソー",
+  "セリア",
+  "ニトリ",
+  "無印良品",
+  "お掃除ラク",
+  "油汚れ対策",
+  "料理が楽しくなる",
+  "片付けが楽になる"
+]
+
+tags.each do |name|
+  Tag.find_or_create_by(name: name)
+end

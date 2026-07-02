@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   # ユーザー詳細・編集・退会
   resources :users, only: [:show, :edit, :update, :destroy]
 
+  # タグ
+  resources :tags, only: [:index, :show]
+
   # ヘルスチェック
   get "up" => "rails/health#show", as: :rails_health_check
 end

@@ -20,6 +20,18 @@
     <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "選択してください", class: "form-select" %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :tag_ids, "ジャンル" %>
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name do |tag| %>
+      <div class="form-check">
+        <%= tag.check_box(class: "form-check-input") %>
+        <%= tag.label(class: "form-check-label") %>
+      </div>
+    <% end %>
+  </div>
+
+
+
   <%= f.submit "投稿する", class: "btn btn-primary" %>
 
 <% end %>
