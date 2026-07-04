@@ -6,6 +6,17 @@
   <% @posts.each do |post| %>
     <div class="col-md-4 mb-4">
       <div class="card h-100 shadow-sm">
+
+        <!-- ★ 画像表示（1枚目をサムネとして表示） -->
+        <% if post.images.attached? %>
+          <%= image_tag post.images.first, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+        <% else %>
+          <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+               style="height: 200px;">
+            画像なし
+          </div>
+        <% end %>
+
         <div class="card-body">
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= truncate(post.body, length: 80) %></p>
@@ -22,6 +33,7 @@
 
           <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
         </div>
+
       </div>
     </div>
   <% end %>

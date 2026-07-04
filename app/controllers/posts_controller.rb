@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :require_login, except: [:index, :show]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :forbid_guest, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = Post.order(created_at: :desc)
@@ -29,20 +29,18 @@ class PostsController < ApplicationController
   end
 
   def update
-  
     if params[:post][:remove_image_ids].present?
       params[:post][:remove_image_ids].each do |image_id|
         @post.images.find(image_id).purge
       end
     end
 
-  # ★ 既存の更新処理（壊さない）
-  if @post.update(post_params)
-    redirect_to @post, notice: "投稿を更新しました！"
-  else
-    render :edit, status: :unprocessable_entity
+    if @post.update(post_params)
+      redirect_to @post, notice: "投稿を更新しました！"
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
-end
 
   def destroy
     @post.destroy
@@ -55,19 +53,14 @@ end
     @post = Post.find(params[:id])
   end
 
-  def ensure_correct_user
-    unless @post.user_id == current_user.id
-      redirect_to posts_path, alert: "権限がありません"
-    end
-  end
-
   def post_params
     params.require(:post).permit(
       :title,
       :body,
       :rating,
       :category_id,
-      images: []   # ← 既存のままでOK
+      images: [],
+      tag_ids: []
     )
   end
 end

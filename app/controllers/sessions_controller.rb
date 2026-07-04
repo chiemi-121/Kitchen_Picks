@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
 
   def guest_login
     user = User.find_by(email: "guest@example.com")
+    reset_session  # ← これ重要！
     session[:user_id] = user.id
     redirect_to posts_path, notice: "ゲストとしてログインしました"
   end
