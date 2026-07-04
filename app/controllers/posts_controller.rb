@@ -29,12 +29,20 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
-      redirect_to @post, notice: "投稿を更新しました！"
-    else
-      render :edit, status: :unprocessable_entity
+  
+    if params[:post][:remove_image_ids].present?
+      params[:post][:remove_image_ids].each do |image_id|
+        @post.images.find(image_id).purge
+      end
     end
+
+  # ★ 既存の更新処理（壊さない）
+  if @post.update(post_params)
+    redirect_to @post, notice: "投稿を更新しました！"
+  else
+    render :edit, status: :unprocessable_entity
   end
+end
 
   def destroy
     @post.destroy
@@ -54,6 +62,12 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :rating, :category_id, images: [])
+    params.require(:post).permit(
+      :title,
+      :body,
+      :rating,
+      :category_id,
+      images: []   # ← 既存のままでOK
+    )
   end
 end

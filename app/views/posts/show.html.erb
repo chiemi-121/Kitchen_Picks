@@ -3,6 +3,15 @@
   <h2><%= @post.title %></h2>
   <hr>
 
+  <!-- ★ 画像ギャラリー（複数対応） -->
+  <% if @post.images.attached? %>
+    <div class="d-flex gap-3 flex-wrap mb-4">
+      <% @post.images.each do |image| %>
+        <%= image_tag image, class: "img-thumbnail", width: 300 %>
+      <% end %>
+    </div>
+  <% end %>
+
   <p><%= simple_format(@post.body) %></p>
 
   <!-- ★ カテゴリ表示 -->

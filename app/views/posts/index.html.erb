@@ -30,8 +30,17 @@
           カテゴリ：<%= post.category.name if post.category.present? %>
         </p>
 
+        <!-- ★ 複数画像表示（追加部分） -->
+        <% if post.images.attached? %>
+          <div class="d-flex gap-2 flex-wrap mt-2">
+            <% post.images.each do |image| %>
+              <%= image_tag image, class: "img-thumbnail", width: 150 %>
+            <% end %>
+          </div>
+        <% end %>
+
         <!-- ★ ジャンル badge（リンク付き・複数） -->
-        <p>
+        <p class="mt-2">
           <% post.tags.each do |tag| %>
             <%= link_to tag_path(tag), class: "text-decoration-none" do %>
               <span class="badge bg-primary"><%= tag.name %></span>

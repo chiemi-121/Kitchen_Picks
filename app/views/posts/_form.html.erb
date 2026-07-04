@@ -12,7 +12,7 @@
     <%= f.text_area :body, class: "form-control", rows: 6 %>
   </div>
 
-  <!-- カテゴリ -->
+  <!-- カテゴリー -->
   <div class="mb-3">
     <%= f.label :category_id, "カテゴリー" %>
     <%= f.collection_select :category_id, Category.all, :id, :name,
@@ -36,27 +36,33 @@
     </div>
   </div>
 
-  <!-- 画像アップロード（必要なら） -->
-  <% if post.respond_to?(:image) %>
-    <div class="mb-3">
-      <%= f.label :image, "画像" %>
-      <%= f.file_field :image, class: "form-control" %>
+  <!-- 画像アップロード（複数対応＋削除ボタン） -->
+  <div class="mb-3">
+    <%= f.label :images, "画像（複数可）" %>
+    <%= f.file_field :images, multiple: true, class: "form-control" %>
 
-      <% if post.image.attached? %>
-        <div class="mt-2">
-          <%= image_tag post.image, class: "img-thumbnail", width: 200 %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% if post.images.attached? %>
+      <div class="mt-2 d-flex gap-3 flex-wrap">
+        <% post.images.each do |image| %>
+          <div class="text-center">
+            <%= image_tag image, class: "img-thumbnail", width: 150 %><br>
 
-  <!-- 評価（必要なら） -->
-  <% if post.respond_to?(:rating) %>
-    <div class="mb-3">
-      <%= f.label :rating, "評価（1〜5）" %>
-      <%= f.number_field :rating, in: 1..5, class: "form-control", step: 1 %>
-    </div>
-  <% end %>
+            <!-- ★ 削除チェックボックス -->
+            <label class="mt-1">
+              <%= check_box_tag "post[remove_image_ids][]", image.id %>
+              削除する
+            </label>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 評価 -->
+  <div class="mb-3">
+    <%= f.label :rating, "評価（1〜5）" %>
+    <%= f.number_field :rating, in: 1..5, class: "form-control", step: 1 %>
+  </div>
 
   <!-- 送信ボタン -->
   <%= f.submit (post.new_record? ? "投稿する" : "更新する"),
