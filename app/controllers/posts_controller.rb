@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :require_login, except: [:index, :show]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
@@ -54,6 +54,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :rating, :category_id)
+    params.require(:post).permit(:title, :body, :rating, :category_id, images: [])
   end
 end

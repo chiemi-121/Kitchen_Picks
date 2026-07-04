@@ -2,39 +2,6 @@
 
 <p>キッチン便利グッズのレビューを投稿しましょう。</p>
 
-<%= form_with model: @post, local: true do |f| %>
+<%= render "form", post: @post %>
 
-  <div class="mb-3">
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :body, "レビュー内容" %>
-    <%= f.text_area :body, class: "form-control" %>
-  </div>
-
-  <!-- 🔥 これが絶対必要！ -->
-  <div class="mb-3">
-    <%= f.label :category_id, "カテゴリー" %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "選択してください", class: "form-select" %>
-  </div>
-
-  <div class="mb-3">
-    <%= f.label :tag_ids, "ジャンル" %>
-
-    <div class="genre-list">
-      <% Tag.all.each do |tag| %>
-        <label class="genre-item">
-          <%= check_box_tag "post[tag_ids][]", tag.id, @post.tag_ids.include?(tag.id) %>
-          <%= tag.name %>
-        </label>
-      <% end %>
-    </div>
-  </div>
-
-
-
-  <%= f.submit "投稿する", class: "btn btn-primary" %>
-
-<% end %>
+  
