@@ -1,5 +1,7 @@
-class AddEncryptedPasswordToUsers < ActiveRecord::Migration[8.0]
+class AddEncryptedPasswordToUsers < ActiveRecord::Migration[7.1]
   def change
-    add_column :users, :encrypted_password, :string
+    if ActiveRecord::Base.connection_db_config.name == "primary"
+      add_column :users, :encrypted_password, :string
+    end
   end
 end
