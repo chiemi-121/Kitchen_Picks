@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index, :show, :new]
   before_action :forbid_guest, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :ensure_post_owner, only: [:edit, :update, :destroy]

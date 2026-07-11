@@ -69,7 +69,8 @@
 }
 
 .top-hero__logo {
-  width: min(100%, 340px);
+  display: block;
+  width: min(100%, 280px);
   height: auto;
 }
 
@@ -111,6 +112,9 @@
 .top-hero__visual {
   position: relative;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .top-hero__card {
@@ -121,7 +125,8 @@
 
 .top-hero__card--main {
   padding: 18px;
-  transform: rotate(-3deg);
+  transform: none;
+  width: min(100%, 560px);
 }
 
 .top-hero__card--note {
@@ -134,8 +139,8 @@
 
 .top-hero__photo {
   width: 100%;
-  height: 100%;
-  max-height: 470px;
+  height: auto;
+  max-height: 420px;
   object-fit: cover;
   border-radius: 20px;
 }
@@ -151,6 +156,14 @@
 @media (max-width: 991.98px) {
   .top-hero__panel {
     padding: 24px;
+  }
+
+  .top-hero__visual {
+    align-items: stretch;
+  }
+
+  .top-hero__card--main {
+    width: 100%;
   }
 
   .top-hero__card--note {
