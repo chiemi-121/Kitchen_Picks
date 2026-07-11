@@ -20,4 +20,20 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to mypage_path
   end
+
+  test "invalid user update re-renders edit with validation messages" do
+    post login_url, params: { email: users(:one).email, password: "password" }
+    assert_redirected_to mypage_path
+
+    patch user_url(users(:one)), params: {
+      user: {
+        name: "",
+        email: ""
+      }
+    }
+
+    assert_response :unprocessable_entity
+    assert_select "h2", text: "プロフィール編集"
+    assert_select "div.alert.alert-danger", text: /入力内容を確認してください/
+  end
 end

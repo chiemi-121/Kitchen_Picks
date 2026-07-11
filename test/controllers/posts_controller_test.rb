@@ -27,4 +27,23 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: "レビュー投稿"
     assert_select "div.alert.alert-danger", text: /入力内容を確認してください/
   end
+
+  test "invalid post update re-renders edit with validation messages" do
+    post login_url, params: { email: users(:one).email, password: "password" }
+    assert_redirected_to mypage_path
+
+    patch post_url(posts(:one)), params: {
+      post: {
+        title: "",
+        body: "",
+        rating: "",
+        category_id: categories(:one).id,
+        tag_ids: []
+      }
+    }
+
+    assert_response :unprocessable_entity
+    assert_select "h2", text: "投稿編集"
+    assert_select "div.alert.alert-danger", text: /入力内容を確認してください/
+  end
 end

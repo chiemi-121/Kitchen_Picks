@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def update
     attributes = user_params.dup
     if attributes[:password].blank? && attributes[:password_confirmation].blank?
-      attributes.except!(:password, :password_confirmation)
+      attributes = attributes.except(:password, :password_confirmation)
     end
 
     if @user.update(attributes)
