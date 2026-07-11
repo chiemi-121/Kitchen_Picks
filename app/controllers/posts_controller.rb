@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index]
   before_action :forbid_guest, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_post_owner, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.order(created_at: :desc)
@@ -44,7 +45,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "投稿を削除しました。"
+    redirect_to mypage_path, notice: "投稿を削除しました。"
   end
 
   private
@@ -62,5 +63,11 @@ class PostsController < ApplicationController
       images: [],
       tag_ids: []
     )
+  end
+
+  def ensure_post_owner
+    return if @post.user_id == current_user.id
+
+    redirect_to posts_path, alert: "他ユーザーの投稿は編集できません"
   end
 end

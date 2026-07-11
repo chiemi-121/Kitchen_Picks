@@ -2,12 +2,20 @@
 
 one:
   id: 1
-  name: Kitchen Tools
+  user_id: 1
+  category_id: 1
+  title: One title
+  body: One body
+  rating: 4
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>
 
 two:
   id: 2
-  name: Storage
+  user_id: 2
+  category_id: 2
+  title: Two title
+  body: Two body
+  rating: 5
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>

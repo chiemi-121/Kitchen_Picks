@@ -1,11 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  post: one
-  user: one
+  id: 1
+  post_id: 1
+  user_id: 1
   body: MyText
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
 two:
-  post: two
-  user: two
+  id: 2
+  post_id: 2
+  user_id: 2
   body: MyText
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

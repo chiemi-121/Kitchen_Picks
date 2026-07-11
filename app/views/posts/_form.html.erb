@@ -1,5 +1,16 @@
 <%= form_with model: post, local: true do |f| %>
 
+  <% if post.errors.any? %>
+    <div class="alert alert-danger">
+      <p class="mb-2">入力内容を確認してください。</p>
+      <ul class="mb-0">
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <!-- タイトル -->
   <div class="mb-3">
     <%= f.label :title, "タイトル" %>

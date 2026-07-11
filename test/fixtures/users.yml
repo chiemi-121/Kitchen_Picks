@@ -2,12 +2,16 @@
 
 one:
   id: 1
-  name: Kitchen Tools
+  name: User One
+  email: one@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>
 
 two:
   id: 2
-  name: Storage
+  name: User Two
+  email: two@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
   created_at: <%= Time.current %>
   updated_at: <%= Time.current %>

@@ -5,4 +5,11 @@
 
   <%= render "form", post: @post %>
 
+  <div class="mt-3">
+    <%= button_to "削除する", post_path(@post),
+          method: :delete,
+          data: { confirm: "本当に削除しますか？" },
+          class: "btn btn-danger" %>
+  </div>
+
 </div>

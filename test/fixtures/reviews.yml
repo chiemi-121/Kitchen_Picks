@@ -3,9 +3,13 @@
 one:
   title: MyString
   body: MyText
-  user: one
+  user_id: 1
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
 
 two:
   title: MyString
   body: MyText
-  user: two
+  user_id: 2
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>

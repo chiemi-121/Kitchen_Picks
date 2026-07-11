@@ -4,13 +4,16 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
+    logger.info("[auth][login] attempt email=#{params[:email].inspect} user_found=#{user.present?}")
 
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
+      logger.info("[auth][login] success user_id=#{user.id}")
       redirect_to mypage_path, notice: "ログインしました！"
     else
+      logger.warn("[auth][login] failed email=#{params[:email].inspect}")
       flash.now[:alert] = "メールアドレスまたはパスワードが違います"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

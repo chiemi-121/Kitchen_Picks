@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_login
+
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
