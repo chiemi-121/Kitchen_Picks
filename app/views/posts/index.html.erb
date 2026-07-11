@@ -34,7 +34,7 @@
         <% if post.images.attached? %>
           <div class="d-flex gap-2 flex-wrap mt-2">
             <% post.images.each do |image| %>
-              <%= image_tag image, class: "img-thumbnail", width: 150 %>
+              <%= image_tag url_for(image), class: "img-thumbnail", width: 150 %>
             <% end %>
           </div>
         <% end %>

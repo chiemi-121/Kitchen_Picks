@@ -9,7 +9,7 @@
 
         <!-- ★ 画像表示（1枚目をサムネとして表示） -->
         <% if post.images.attached? %>
-          <%= image_tag post.images.first, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <%= image_tag url_for(post.images.first), class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
         <% else %>
           <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
                style="height: 200px;">

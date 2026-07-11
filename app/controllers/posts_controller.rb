@@ -20,6 +20,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
 
     if @post.save
+      attach_images(@post, post_params[:images])
       redirect_to @post, notice: "投稿しました！"
     else
       render :new, status: :unprocessable_entity
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params)
+      attach_images(@post, post_params[:images])
       redirect_to @post, notice: "投稿を更新しました！"
     else
       render :edit, status: :unprocessable_entity
@@ -69,5 +71,11 @@ class PostsController < ApplicationController
     return if @post.user_id == current_user.id
 
     redirect_to posts_path, alert: "他ユーザーの投稿は編集できません"
+  end
+
+  def attach_images(post, images)
+    return if images.blank?
+
+    post.images.attach(images)
   end
 end
