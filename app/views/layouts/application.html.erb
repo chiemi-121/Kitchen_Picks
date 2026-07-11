@@ -15,7 +15,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <!-- ====== ヘッダー ====== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -49,7 +49,7 @@
     </nav>
 
     <!-- ====== ページ内容 ====== -->
-    <main class="container mt-4">
+    <main class="container mt-4 flex-grow-1">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show" role="alert">
           <%= message %>
@@ -59,6 +59,13 @@
 
       <%= yield %>
     </main>
+
+    <footer class="site-footer bg-dark text-light py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-1 fw-semibold">Kitchen Picks</p>
+        <p class="mb-0 small text-secondary">キッチン便利グッズのレビューを共有するポートフォリオアプリ</p>
+      </div>
+    </footer>
 
   </body>
 </html>

@@ -16,7 +16,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
 
@@ -34,9 +34,16 @@
       </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="container mt-4 flex-grow-1">
       <%= yield %>
     </main>
+
+    <footer class="site-footer bg-dark text-light py-4 mt-5">
+      <div class="container text-center">
+        <p class="mb-1 fw-semibold">Kitchen Picks</p>
+        <p class="mb-0 small text-secondary">毎日のキッチンを少し便利にするレビュー共有サービス</p>
+      </div>
+    </footer>
 
   </body>
 </html>

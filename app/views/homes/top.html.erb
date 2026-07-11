@@ -1,24 +1,58 @@
-<div class="container text-center mt-5">
+<section class="top-hero py-5">
+  <div class="top-hero__backdrop"></div>
 
-  <!-- ロゴ画像（上に余白を追加） -->
-  <%= image_tag asset_path("kitchen_picks_logo.png"),
-      alt: "Kitchen Picks ロゴ",
-      class: "logo-img mx-auto d-block mt-5 mb-4" %>
+  <div class="container position-relative">
+    <div class="top-hero__panel row g-4 align-items-center mx-0">
+      <div class="col-lg-6">
+        <div class="top-hero__copy">
+          <span class="top-hero__eyebrow">KITCHEN PICKS</span>
 
-  <h1 class="fw-bold mb-4">Kitchen Picks へようこそ！</h1>
+          <%= image_tag asset_path("kitchen_picks_logo.png"),
+              alt: "Kitchen Picks ロゴ",
+              class: "top-hero__logo mb-4" %>
 
-  <p class="lead mb-5">
-    キッチン便利グッズのレビュー・投稿アプリです。<br>
-    気に入ったアイテムの使い心地を共有しましょう。
-  </p>
+          <h1 class="top-hero__title mb-3">毎日の料理を、<br>少しだけ軽くする。</h1>
 
-  <% unless user_signed_in? %>
-    <div class="d-flex justify-content-center gap-3">
+          <p class="top-hero__lead mb-4">
+            キッチン便利グッズの使い心地を共有しながら、
+            時短・収納・下ごしらえの工夫を見つけられるレビューアプリです。
+          </p>
 
-      <%= link_to "ログイン", login_path,
-          class: "btn btn-outline-primary btn-lg rounded-pill px-4" %>
+          <div class="top-hero__chips mb-4">
+            <span>時短アイデア</span>
+            <span>収納グッズ</span>
+            <span>下ごしらえ効率化</span>
+          </div>
 
+          <% unless user_signed_in? %>
+            <div class="top-hero__actions">
+              <%= link_to "投稿一覧を見る", posts_path,
+                  class: "btn btn-dark btn-lg rounded-pill px-4" %>
+
+              <%= link_to "新規登録", signup_path,
+                  class: "btn btn-warning btn-lg rounded-pill px-4" %>
+
+              <%= link_to "ログイン", login_path,
+                  class: "btn btn-outline-dark btn-lg rounded-pill px-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="top-hero__visual">
+          <div class="top-hero__card top-hero__card--main">
+            <%= image_tag asset_path("slicer.jpeg"),
+                alt: "キッチンスライサー",
+                class: "top-hero__photo" %>
+          </div>
+
+          <div class="top-hero__card top-hero__card--note">
+            <p class="mb-1 fw-semibold">Pick Up Review</p>
+            <p class="mb-0 small text-muted">皮むき・千切りが1本で済む定番ツール。使いやすさや収納性も投稿から比較できます。</p>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-</div>
+  </div>
+</section>
