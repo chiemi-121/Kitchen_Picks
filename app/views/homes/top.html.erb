@@ -15,15 +15,8 @@
   <% unless user_signed_in? %>
     <div class="d-flex justify-content-center gap-3">
 
-      <%= link_to "新規登録", signup_path,
-          class: "btn btn-primary btn-lg rounded-pill px-4" %>
-
       <%= link_to "ログイン", login_path,
           class: "btn btn-outline-primary btn-lg rounded-pill px-4" %>
-
-      <%= button_to "ゲストログイン", guest_login_path,
-          method: :post,
-          class: "btn btn-warning btn-lg rounded-pill px-4" %>
 
     </div>
   <% end %>

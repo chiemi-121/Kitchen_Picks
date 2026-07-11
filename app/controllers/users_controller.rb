@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:mypage, :edit, :update, :destroy]
   before_action :ensure_current_user, only: [:edit, :update, :destroy]
+  before_action :disable_signup, only: [:new, :create]
 
   # 新規登録
   def new
@@ -76,5 +77,9 @@ class UsersController < ApplicationController
     return if @user.id == current_user.id
 
     redirect_to mypage_path, alert: "他ユーザーの編集はできません"
+  end
+
+  def disable_signup
+    redirect_to login_path, alert: "現在、新規登録は利用できません"
   end
 end
