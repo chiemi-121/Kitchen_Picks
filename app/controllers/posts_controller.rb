@@ -16,11 +16,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.except(:images))
     @post.user_id = current_user.id
 
     if @post.save
-      attach_images(@post, post_params[:images])
+      attach_images(@post, uploaded_images)
       redirect_to @post, notice: "投稿しました！"
     else
       render :new, status: :unprocessable_entity
@@ -37,8 +37,8 @@ class PostsController < ApplicationController
       end
     end
 
-    if @post.update(post_params)
-      attach_images(@post, post_params[:images])
+    if @post.update(post_params.except(:images))
+      attach_images(@post, uploaded_images)
       redirect_to @post, notice: "投稿を更新しました！"
     else
       render :edit, status: :unprocessable_entity
@@ -77,5 +77,9 @@ class PostsController < ApplicationController
     return if images.blank?
 
     post.images.attach(images)
+  end
+
+  def uploaded_images
+    Array(params.dig(:post, :images)).reject(&:blank?)
   end
 end
