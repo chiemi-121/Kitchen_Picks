@@ -5,10 +5,12 @@ class PostsController < ApplicationController
   before_action :ensure_post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:user, :category, :comments, :tags).order(created_at: :desc)
   end
 
   def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
   end
 
   def new
