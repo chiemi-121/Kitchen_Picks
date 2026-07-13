@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
   # コメント
-  resources :comments, only: [:create]
+  resources :comments, only: [:create, :destroy]
 
   # カテゴリ（重複ルート削除済み）
   resources :categories, only: [:index, :show]

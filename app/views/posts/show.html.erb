@@ -46,6 +46,55 @@
 
   <hr>
 
+  <h4>コメント（<%= @comments.count %>件）</h4>
+
+  <% if @comments.any? %>
+    <ul class="list-group mb-3">
+      <% @comments.each do |comment| %>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <div class="fw-bold"><%= comment.user.name %></div>
+            <div><%= simple_format(comment.body) %></div>
+            <small class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+          </div>
+
+          <% if current_user && comment.user_id == current_user.id %>
+            <%= button_to "削除", comment_path(comment),
+                method: :delete,
+                data: { confirm: "このコメントを削除しますか？" },
+                class: "btn btn-sm btn-outline-danger" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-muted">まだコメントはありません。</p>
+  <% end %>
+
+  <% if current_user %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">コメントを投稿する</h5>
+
+        <%= form_with model: @comment, local: true do |f| %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+
+          <div class="mb-2">
+            <%= f.text_area :body, rows: 3, class: "form-control", placeholder: "コメントを入力してください" %>
+          </div>
+
+          <%= f.submit "送信", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <p>
+      <%= link_to "ログイン", login_path %>するとコメントできます。
+    </p>
+  <% end %>
+
+  <hr>
+
   <%= link_to "投稿一覧へ戻る", posts_path, class: "btn btn-secondary" %>
 
 </div>
