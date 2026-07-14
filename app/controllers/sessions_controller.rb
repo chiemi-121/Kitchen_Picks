@@ -6,10 +6,14 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     logger.info("[auth][login] attempt email=#{params[:email].inspect} user_found=#{user.present?}")
 
-    if user&.authenticate(params[:password])
+    if user&.authenticate(params[:password]) && user.is_active?
       session[:user_id] = user.id
       logger.info("[auth][login] success user_id=#{user.id}")
       redirect_to mypage_path, notice: "ログインしました！"
+    elsif user&.authenticate(params[:password])
+      logger.warn("[auth][login] inactive email=#{params[:email].inspect}")
+      flash.now[:alert] = "このアカウントは利用停止中です"
+      render :new, status: :unprocessable_entity
     else
       logger.warn("[auth][login] failed email=#{params[:email].inspect}")
       flash.now[:alert] = "メールアドレスまたはパスワードが違います"
@@ -18,7 +22,12 @@ class SessionsController < ApplicationController
   end
 
   def guest_login
-    user = User.find_by(email: "guest@example.com")
+    user = User.find_by(email: "guest@example.com", is_active: true)
+    unless user
+      redirect_to login_path, alert: "ゲストユーザーが利用できません"
+      return
+    end
+
     reset_session  # ← これ重要！
     session[:user_id] = user.id
     redirect_to posts_path, notice: "ゲストとしてログインしました"

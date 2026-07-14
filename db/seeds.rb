@@ -49,3 +49,13 @@ tags = [
 tags.each do |name|
   Tag.find_or_create_by(name: name)
 end
+
+admin_login_id = ENV.fetch("ADMIN_LOGIN_ID", "admin")
+admin_email = ENV.fetch("ADMIN_EMAIL", "admin@example.com")
+admin_password = ENV.fetch("ADMIN_PASSWORD", "password")
+
+admin = Admin.find_or_initialize_by(login_id: admin_login_id)
+admin.email = admin_email
+admin.password = admin_password
+admin.password_confirmation = admin_password
+admin.save!
