@@ -40,6 +40,9 @@ Rails.application.routes.draw do
   # コメント
   resources :comments, only: [:create, :destroy]
 
+  # 検索
+  get "/search", to: "searches#search"
+
   # カテゴリ（重複ルート削除済み）
   resources :categories, only: [:index, :show]
 
