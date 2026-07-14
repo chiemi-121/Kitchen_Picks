@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_secure_password  
 
+  attribute :is_active, :boolean, default: true
+
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
 end

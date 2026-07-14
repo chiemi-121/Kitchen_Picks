@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get "/login", to: "sessions#new"
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+
+    root to: "dashboard#show"
+    get "/dashboard", to: "dashboard#show", as: :dashboard
+    resources :posts, path: "reviews", only: [:index, :show, :destroy]
+    resources :comments, only: [:destroy]
+    resources :users, only: [:index, :show] do
+      member do
+        patch :deactivate
+        patch :activate
+      end
+    end
+  end
+
   root to: "homes#top"
   get "/about", to: "homes#about"
 
