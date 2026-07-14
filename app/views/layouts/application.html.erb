@@ -48,6 +48,36 @@
       </div>
     </nav>
 
+    <% if user_signed_in? %>
+      <div class="bg-light border-bottom py-2">
+        <div class="container">
+          <%= form_with url: search_path, method: :get, local: true, class: "row g-2 align-items-center" do |f| %>
+            <div class="col-12 col-md-3">
+              <%= f.select :range,
+                    [["ユーザー", "User"], ["投稿", "Post"]],
+                    { selected: params[:range] || "Post" },
+                    { class: "form-select form-select-sm" } %>
+            </div>
+
+            <div class="col-12 col-md-3">
+              <%= f.select :search,
+                    [["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]],
+                    { selected: params[:search] || "partial" },
+                    { class: "form-select form-select-sm" } %>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <%= f.text_field :word, value: params[:word], placeholder: "キーワードを入力", class: "form-control form-control-sm" %>
+            </div>
+
+            <div class="col-12 col-md-2 d-grid">
+              <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
     <!-- ====== ページ内容 ====== -->
     <main class="container mt-4 flex-grow-1">
       <% flash.each do |message_type, message| %>
