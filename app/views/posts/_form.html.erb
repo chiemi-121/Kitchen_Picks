@@ -72,8 +72,23 @@
 
   <!-- 評価 -->
   <div class="mb-3">
-    <%= f.label :rating, "評価（1〜5）" %>
-    <%= f.number_field :rating, in: 1..5, class: "form-control", step: 1 %>
+    <%= f.label :rating, "評価" %>
+
+    <% if post.new_record? %>
+      <div
+        class="post-rating-input"
+        data-rating-input
+        data-rating-score="<%= post.rating || 0 %>"
+        data-rating-score-name="post[rating]"
+        data-rating-star-on="<%= asset_path("star-on.svg") %>"
+        data-rating-star-off="<%= asset_path("star-off.svg") %>"
+        data-rating-star-half="<%= asset_path("star-half.svg") %>">
+      </div>
+      <p class="form-text mb-0">星を選んで 1〜5 の評価をつけてください。</p>
+    <% else %>
+      <%= render "rating", rating: post.rating, class_name: "post-rating--lg" %>
+      <p class="form-text mb-0">評価は投稿時のみ設定でき、あとから変更できません。</p>
+    <% end %>
   </div>
 
   <!-- 送信ボタン -->

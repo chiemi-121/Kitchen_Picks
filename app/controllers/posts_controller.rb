@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   before_action :ensure_post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.includes(:user, :category, :comments, :tags, :favorites).order(created_at: :desc)
+    @sort = params[:sort] == "rating" ? "rating" : "latest"
+    @posts = Post.includes(:user, :category, :comments, :tags, :favorites).order(posts_order)
   end
 
   def show
@@ -39,7 +40,7 @@ class PostsController < ApplicationController
       end
     end
 
-    if @post.update(post_params.except(:images))
+    if @post.update(post_params.except(:images, :rating))
       attach_images(@post, uploaded_images)
       redirect_to @post, notice: "投稿を更新しました！"
     else
@@ -83,5 +84,11 @@ class PostsController < ApplicationController
 
   def uploaded_images
     Array(params.dig(:post, :images)).reject(&:blank?)
+  end
+
+  def posts_order
+    return { rating: :desc, created_at: :desc } if @sort == "rating"
+
+    { created_at: :desc }
   end
 end

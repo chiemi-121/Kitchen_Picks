@@ -27,7 +27,7 @@
   </p>
 
   <p class="text-muted">
-    評価：<%= "★" * @post.rating %><%= "☆" * (5 - @post.rating) %><br>
+    <span class="d-inline-flex align-items-center gap-1">評価：<%= render "rating", rating: @post.rating, class_name: "post-rating--lg" %></span><br>
     いいね：<%= render "favorite_count", post: @post %><br>
     投稿者：<%= link_to @post.user.name, user_path(@post.user), class: "text-decoration-none" %><br>
     投稿日時：<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
