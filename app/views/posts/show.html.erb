@@ -1,13 +1,13 @@
-<div class="container mt-4">
+<div class="post-show mx-auto">
 
   <h2><%= @post.title %></h2>
   <hr>
 
   <!-- ★ 画像ギャラリー（複数対応） -->
   <% if @post.images.attached? %>
-    <div class="d-flex gap-3 flex-wrap mb-4">
+    <div class="post-show__images d-flex justify-content-center flex-wrap gap-3 mb-4">
       <% @post.images.each do |image| %>
-        <%= image_tag url_for(image), class: "img-thumbnail", width: 300 %>
+        <%= image_tag url_for(image), class: "img-thumbnail post-show__image" %>
       <% end %>
     </div>
   <% end %>
@@ -36,12 +36,14 @@
 
   <!-- 編集・削除ボタン（ログインユーザーの投稿のみ表示） -->
   <% if current_user && @post.user_id == current_user.id %>
-    <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary me-2" %>
+    <div class="post-show__actions d-flex flex-wrap gap-3">
+      <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary" %>
 
-    <%= button_to "削除する", post_path(@post),
-        method: :delete,
-        data: { confirm: "本当に削除しますか？" },
-        class: "btn btn-danger" %>
+      <%= button_to "削除する", post_path(@post),
+          method: :delete,
+          data: { confirm: "本当に削除しますか？" },
+          class: "btn btn-danger" %>
+    </div>
   <% end %>
 
   <hr>
