@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   def mypage
     @user = current_user
     @posts = @user.posts.order(created_at: :desc)
+    @favorite_posts = @user.favorite_posts.includes(:user, :category).order("favorites.created_at DESC")
   end
 
   # ユーザー詳細

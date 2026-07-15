@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   belongs_to :category
 
   has_many :comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
 
   # タグ機能（多対多）
   has_many :post_tags, dependent: :destroy
@@ -15,4 +17,14 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
   validates :rating, presence: true
+
+  def favorited_by?(user)
+    return false unless user
+
+    if favorites.loaded?
+      favorites.any? { |favorite| favorite.user_id == user.id }
+    else
+      favorites.exists?(user_id: user.id)
+    end
+  end
 end
