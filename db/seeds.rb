@@ -17,7 +17,7 @@ categories = [
 ]
 
 categories.each do |name|
-  Category.find_or_create_by(name: name)
+  Category.find_or_create_by!(name: name)
 end
 
 tags = [
@@ -47,15 +47,21 @@ tags = [
 ]
 
 tags.each do |name|
-  Tag.find_or_create_by(name: name)
+  Tag.find_or_create_by!(name: name)
 end
 
 admin_login_id = ENV.fetch("ADMIN_LOGIN_ID", "admin")
 admin_email = ENV.fetch("ADMIN_EMAIL", "admin@example.com")
 admin_password = ENV.fetch("ADMIN_PASSWORD", "password")
 
-admin = Admin.find_or_initialize_by(login_id: admin_login_id)
-admin.email = admin_email
-admin.password = admin_password
-admin.password_confirmation = admin_password
-admin.save!
+admin = Admin.find_or_create_by!(login_id: admin_login_id) do |record|
+  record.email = admin_email
+  record.password = admin_password
+  record.password_confirmation = admin_password
+end
+
+admin.update!(
+  email: admin_email,
+  password: admin_password,
+  password_confirmation: admin_password
+)

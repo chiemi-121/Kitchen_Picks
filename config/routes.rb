@@ -35,7 +35,9 @@ Rails.application.routes.draw do
   post "/guest_login", to: "sessions#guest_login"
 
   # 投稿
-  resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+    resource :favorite, only: [:create, :destroy]
+  end
 
   # コメント
   resources :comments, only: [:create, :destroy]

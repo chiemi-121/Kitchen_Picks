@@ -1,0 +1,11 @@
+<%= turbo_stream.replace dom_id(@post, :comments_list),
+      partial: "posts/comments_list",
+      locals: { post: @post, comments: @comments } %>
+
+<%= turbo_stream.replace dom_id(@post, :comments_count),
+      partial: "posts/comments_count",
+      locals: { post: @post, comments: @comments } %>
+
+<%= turbo_stream.replace dom_id(@post, :comment_form),
+      partial: "posts/comment_form",
+      locals: { post: @post, comment: (@comment.persisted? ? Comment.new(post_id: @post.id) : @comment) } %>

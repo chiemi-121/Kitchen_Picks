@@ -1,0 +1,3 @@
+<%= turbo_frame_tag dom_id(post, :favorite_count) do %>
+  <%= post.favorites.count %>件
+<% end %>
