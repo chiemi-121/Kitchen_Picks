@@ -1,0 +1,13 @@
+Puma starting in single mode...
+* Puma version: 8.0.2 ("Into the Arena")
+* Ruby version: ruby 3.3.6 (2024-11-05 revision 75015d4c1f) [x86_64-linux]
+*  Min threads: 3
+*  Max threads: 3
+*  Environment: production
+*          PID: 6437
+[dotenv] Loaded [33m.env[0m
+* Listening on unix:///home/ubuntu/Kitchen_Picks/tmp/sockets/puma.sock
+Use Ctrl-C to stop
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2026-07-11 14:56:05 +0000 ===
+- Goodbye!
