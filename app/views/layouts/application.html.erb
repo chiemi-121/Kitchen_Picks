@@ -6,10 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <%= javascript_importmap_tags %>
@@ -17,9 +16,9 @@
 
   <body class="d-flex flex-column min-vh-100">
     <!-- ====== ヘッダー ====== -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-app">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="/">Kitchen Picks</a>
+        <a class="navbar-brand fw-semibold" href="/">Kitchen Picks</a>
 
         <div class="navbar-collapse">
           <ul class="navbar-nav ms-auto">
@@ -35,7 +34,7 @@
                       logout_path,
                       method: :delete,
                       data: { turbo_method: :delete },
-                      class: "nav-link text-warning" %>
+                      class: "nav-link" %>
               </li>
             <% else %>
               <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link" %></li>
@@ -49,7 +48,7 @@
     </nav>
 
     <% if user_signed_in? %>
-      <div class="bg-light border-bottom py-2">
+      <div class="search-strip py-2">
         <div class="container">
           <%= form_with url: search_path, method: :get, local: true, class: "row g-2 align-items-center" do |f| %>
             <div class="col-12 col-md-3">
@@ -79,7 +78,7 @@
     <% end %>
 
     <!-- ====== ページ内容 ====== -->
-    <main class="container mt-4 flex-grow-1">
+    <main class="container py-4 flex-grow-1 content-shell">
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show" role="alert">
           <%= message %>
@@ -90,10 +89,10 @@
       <%= yield %>
     </main>
 
-    <footer class="site-footer bg-dark text-light py-4 mt-5">
+    <footer class="site-footer-app py-4 mt-4">
       <div class="container text-center">
-        <p class="mb-1 fw-semibold">Kitchen Picks</p>
-        <p class="mb-0 small text-secondary">キッチン便利グッズのレビューを共有するポートフォリオアプリ</p>
+        <p class="mb-1 fw-semibold text-body">Kitchen Picks</p>
+        <p class="mb-0 small text-muted">キッチン便利グッズのレビューを共有するポートフォリオアプリ</p>
       </div>
     </footer>
 

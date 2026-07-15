@@ -1,62 +1,69 @@
-<div class="container mt-4">
-
-  <h2>投稿一覧</h2>
-  <p class="text-muted">最新の投稿から順に表示しています。</p>
-  <hr>
-
-  <% @posts.each do |post| %>
-    <div class="card mb-3">
-      <div class="card-body">
-
-        <!-- タイトル（詳細ページへのリンク） -->
-        <h4>
-          <%= link_to post.title, post_path(post), class: "text-decoration-none" %>
-        </h4>
-
-        <!-- 評価 -->
-        <p>
-          評価：
-          <%= "★" * post.rating %>
-          <%= "☆" * (5 - post.rating) %>
-        </p>
-
-        <!-- 本文（先頭だけ表示） -->
-        <p class="text-muted">
-          <%= truncate(post.body, length: 80) %>
-        </p>
-
-        <!-- カテゴリ名 -->
-        <p class="text-muted">
-          カテゴリ：<%= post.category.name if post.category.present? %>
-        </p>
-
-        <!-- ★ 複数画像表示（追加部分） -->
-        <% if post.images.attached? %>
-          <div class="d-flex gap-2 flex-wrap mt-2">
-            <% post.images.each do |image| %>
-              <%= image_tag url_for(image), class: "img-thumbnail", width: 150 %>
-            <% end %>
-          </div>
-        <% end %>
-
-        <!-- ★ ジャンル badge（リンク付き・複数） -->
-        <p class="mt-2">
-          <% post.tags.each do |tag| %>
-            <%= link_to tag_path(tag), class: "text-decoration-none" do %>
-              <span class="badge bg-primary"><%= tag.name %></span>
-            <% end %>
-          <% end %>
-        </p>
-
-        <!-- 投稿者・日時 -->
-        <p class="text-muted">
-          投稿者：<%= post.user.name %><br>
-          コメント数：<%= post.comments.size %>件<br>
-          投稿日時：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
-        </p>
-
-      </div>
+<div class="post-index">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2 mb-4">
+    <div>
+      <h2 class="mb-1">投稿一覧</h2>
+      <p class="text-muted mb-0">最新の投稿から順に表示しています。</p>
     </div>
-  <% end %>
+  </div>
 
+  <% if @posts.any? %>
+    <div class="row row-cols-1 row-cols-lg-2 g-4">
+      <% @posts.each do |post| %>
+        <div class="col">
+          <article class="card post-card h-100">
+            <div class="card-body p-4 d-flex flex-column gap-3">
+              <div class="d-flex justify-content-between align-items-start gap-3">
+                <div class="flex-grow-1">
+                  <h3 class="h5 mb-2">
+                    <%= link_to post.title, post_path(post), class: "post-card__title text-decoration-none" %>
+                  </h3>
+
+                  <div class="post-card__meta text-muted small">
+                    <span>評価：<%= "★" * post.rating %><%= "☆" * (5 - post.rating) %></span>
+                    <span>・</span>
+                    <span>コメント <%= post.comments.size %>件</span>
+                  </div>
+                </div>
+
+                <% if post.category.present? %>
+                  <span class="badge text-bg-light border post-card__category"><%= post.category.name %></span>
+                <% end %>
+              </div>
+
+              <p class="text-muted mb-0"><%= truncate(post.body, length: 110) %></p>
+
+              <% if post.images.attached? %>
+                <div class="post-card__images">
+                  <% post.images.each do |image| %>
+                    <%= image_tag url_for(image), class: "post-card__image" %>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% if post.tags.any? %>
+                <div class="d-flex flex-wrap gap-2">
+                  <% post.tags.each do |tag| %>
+                    <%= link_to tag_path(tag), class: "text-decoration-none" do %>
+                      <span class="badge rounded-pill text-bg-primary post-card__tag"><%= tag.name %></span>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <div class="post-card__footer d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 pt-2 mt-auto">
+                <div class="text-muted small">
+                  投稿者：<%= post.user.name %><br>
+                  投稿日時：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
+                </div>
+
+                <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-secondary btn-sm" %>
+              </div>
+            </div>
+          </article>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-light border mb-0">まだ投稿はありません。</div>
+  <% end %>
 </div>

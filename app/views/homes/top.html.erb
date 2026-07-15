@@ -27,10 +27,10 @@
           <% unless user_signed_in? %>
             <div class="top-hero__actions">
               <%= link_to "新規登録", signup_path,
-                  class: "btn btn-warning btn-lg rounded-pill px-4" %>
+                  class: "btn btn-outline-primary btn-lg rounded-pill px-4" %>
 
               <%= link_to "ログイン", login_path,
-                  class: "btn btn-outline-dark btn-lg rounded-pill px-4" %>
+                  class: "btn btn-outline-secondary btn-lg rounded-pill px-4" %>
             </div>
           <% end %>
         </div>
