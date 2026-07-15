@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>KitchenPicks</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="icon" href="/icon.png" type="image/png">
@@ -21,7 +21,11 @@
 
         <a class="navbar-brand fw-semibold" href="/">Kitchen Picks</a>
 
-        <div class="navbar-collapse">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="topNavbar">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link" %></li>
             <li class="nav-item"><%= link_to "About", about_path, class: "nav-link" %></li>
