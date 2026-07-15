@@ -12,9 +12,9 @@ class SearchesController < ApplicationController
     return if @word.blank?
 
     if @range == "User"
-      @users = User.where(name: search_condition(@search, @word)).order(created_at: :desc)
+      @users = User.where(search_scope_for_users, search_params).order(created_at: :desc)
     else
-      @posts = Post.includes(:user, :category).where(title: search_condition(@search, @word)).order(created_at: :desc)
+      @posts = Post.includes(:user, :category).where(search_scope_for_posts, search_params).order(created_at: :desc)
     end
   end
 
@@ -31,5 +31,17 @@ class SearchesController < ApplicationController
     else
       "%#{word}%"
     end
+  end
+
+  def search_scope_for_users
+    "name LIKE :word OR email LIKE :word"
+  end
+
+  def search_scope_for_posts
+    "title LIKE :word OR body LIKE :word"
+  end
+
+  def search_params
+    { word: search_condition(@search, @word) }
   end
 end

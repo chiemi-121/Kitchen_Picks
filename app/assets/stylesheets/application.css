@@ -177,6 +177,24 @@ body {
   border-top: 1px solid var(--kp-border);
 }
 
+.post-show {
+  max-width: 900px;
+}
+
+.post-show__images {
+  margin-inline: auto;
+}
+
+.post-show__image {
+  width: min(100%, 420px);
+  height: auto;
+  object-fit: cover;
+}
+
+.post-show__actions {
+  margin-top: 0.5rem;
+}
+
 .genre-list {
   display: flex;
   flex-wrap: wrap;
