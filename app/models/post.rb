@@ -17,6 +17,8 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
   validates :rating, presence: true
+  validates :rating, inclusion: { in: 1..5 }
+  validate :rating_immutable, on: :update
 
   def favorited_by?(user)
     return false unless user
@@ -26,5 +28,13 @@ class Post < ApplicationRecord
     else
       favorites.exists?(user_id: user.id)
     end
+  end
+
+  private
+
+  def rating_immutable
+    return unless will_save_change_to_rating?
+
+    errors.add(:rating, "は投稿後に変更できません")
   end
 end

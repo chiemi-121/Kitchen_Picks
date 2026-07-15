@@ -2,7 +2,14 @@
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2 mb-4">
     <div>
       <h2 class="mb-1">投稿一覧</h2>
-      <p class="text-muted mb-0">最新の投稿から順に表示しています。</p>
+      <p class="text-muted mb-0">
+        <%= @sort == "rating" ? "評価の高い投稿から順に表示しています。" : "最新の投稿から順に表示しています。" %>
+      </p>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 post-sort">
+      <%= link_to "新着順", posts_path(sort: "latest"), class: "btn btn-sm #{ @sort == "latest" ? "btn-primary" : "btn-outline-secondary" }" %>
+      <%= link_to "評価が高い順", posts_path(sort: "rating"), class: "btn btn-sm #{ @sort == "rating" ? "btn-primary" : "btn-outline-secondary" }" %>
     </div>
   </div>
 
@@ -19,7 +26,7 @@
                   </h3>
 
                   <div class="post-card__meta text-muted small">
-                    <span>評価：<%= "★" * post.rating %><%= "☆" * (5 - post.rating) %></span>
+                    <span class="d-inline-flex align-items-center gap-1">評価：<%= render "rating", rating: post.rating %></span>
                     <span>・</span>
                     <span>コメント <%= post.comments.size %>件</span>
                     <span>・</span>

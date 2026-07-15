@@ -195,6 +195,31 @@ body {
   margin-top: 0.5rem;
 }
 
+.post-rating {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+}
+
+.post-rating img,
+.post-rating-input img {
+  width: 20px;
+  height: 20px;
+}
+
+.post-rating--lg img {
+  width: 24px;
+  height: 24px;
+}
+
+.post-rating-input {
+  min-height: 24px;
+}
+
+.post-sort {
+  align-items: center;
+}
+
 .genre-list {
   display: flex;
   flex-wrap: wrap;

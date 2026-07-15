@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   # ユーザー詳細
   def show
+    @posts = @user.posts.includes(:category).order(created_at: :desc)
   end
 
   # 編集
