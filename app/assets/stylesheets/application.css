@@ -218,6 +218,77 @@ body {
   border-color: #bbb;
 }
 
+.post-index {
+  padding: 0.25rem;
+}
+
+.post-card {
+  border: 1px solid var(--kp-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 10px rgba(68, 63, 55, 0.05);
+}
+
+.post-card__title {
+  color: #0d6efd;
+}
+
+.post-card__title:hover {
+  color: #0b5ed7;
+}
+
+.post-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-card__category {
+  align-self: flex-start;
+  color: #6a6258;
+  background: #fbfaf8 !important;
+}
+
+.post-card__images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.post-card__image {
+  width: 124px;
+  height: 124px;
+  object-fit: cover;
+  border-radius: 0.9rem;
+  border: 1px solid var(--kp-border);
+  background: #fff;
+}
+
+.post-card__tag {
+  letter-spacing: 0.02em;
+}
+
+.post-card__footer {
+  border-top: 1px solid var(--kp-border);
+}
+
+.post-show {
+  max-width: 900px;
+}
+
+.post-show__images {
+  margin-inline: auto;
+}
+
+.post-show__image {
+  width: min(100%, 420px);
+  height: auto;
+  object-fit: cover;
+}
+
+.post-show__actions {
+  margin-top: 0.5rem;
+}
+
 .img-fluid {
   max-width: 400px;
   height: auto;
