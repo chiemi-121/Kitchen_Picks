@@ -2,12 +2,16 @@ class SearchesController < ApplicationController
   before_action :require_login
 
   def search
-    @range = params[:range].presence_in(["User", "Post"]) || "Post"
+    @range = params[:range].presence_in(["User", "Post", "Tag"]) || "Post"
     @search = params[:search].presence_in(["perfect", "forward", "backward", "partial"]) || "partial"
     @word = params[:word].to_s.strip
 
     @users = []
     @posts = []
+
+    if @range == "Tag"
+      redirect_to tags_path(word: @word, search: @search, range: "Tag") and return
+    end
 
     return if @word.blank?
 

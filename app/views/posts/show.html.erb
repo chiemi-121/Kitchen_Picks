@@ -17,12 +17,10 @@
   <!-- ★ カテゴリ表示 -->
   <p><strong>カテゴリー：</strong> <%= @post.category.name %></p>
 
-  <!-- ★ ジャンル表示（リンク付き・複数） -->
+  <!-- ★ ジャンル表示（複数） -->
   <p><strong>ジャンル：</strong>
     <% @post.tags.each do |tag| %>
-      <%= link_to tag_path(tag), class: "text-decoration-none" do %>
-        <span class="badge bg-primary"><%= tag.name %></span>
-      <% end %>
+      <span class="badge bg-primary"><%= tag.name %></span>
     <% end %>
   </p>
 

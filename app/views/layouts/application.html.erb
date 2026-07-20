@@ -58,7 +58,7 @@
           <%= form_with url: search_path, method: :get, local: true, class: "row g-2 align-items-center" do |f| %>
             <div class="col-12 col-md-3">
               <%= f.select :range,
-                    [["ユーザー", "User"], ["投稿", "Post"]],
+                  [["ユーザー", "User"], ["投稿", "Post"], ["ジャンル", "Tag"]],
                     { selected: params[:range] || "Post" },
                     { class: "form-select form-select-sm" } %>
             </div>
