@@ -35,6 +35,9 @@ tags = [
   "片付けが楽になる"
 ]
 
+# seeds の配列を正として、配列外の旧タグを削除する
+Tag.where.not(name: tags).find_each(&:destroy)
+
 tags.each do |name|
   Tag.find_or_create_by!(name: name)
 end
