@@ -199,6 +199,96 @@ body {
   margin-inline: auto;
 }
 
+.kp-pagination-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.kp-pagination-meta {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--kp-muted);
+  font-size: 0.9rem;
+}
+
+.kp-pagination-single {
+  width: fit-content;
+  margin-inline: auto;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--kp-border);
+  border-radius: 999px;
+  background: var(--kp-surface-warm);
+  color: var(--kp-muted);
+  font-size: 0.85rem;
+}
+
+.kp-pagination-wrap .pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kp-pagination-wrap .page,
+.kp-pagination-wrap .first,
+.kp-pagination-wrap .prev,
+.kp-pagination-wrap .next,
+.kp-pagination-wrap .last,
+.kp-pagination-wrap .current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid var(--kp-border);
+  border-radius: 999px;
+  background: var(--kp-surface);
+  color: var(--kp-muted);
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.kp-pagination-wrap .page a,
+.kp-pagination-wrap .first a,
+.kp-pagination-wrap .prev a,
+.kp-pagination-wrap .next a,
+.kp-pagination-wrap .last a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.kp-pagination-wrap .page:hover,
+.kp-pagination-wrap .first:hover,
+.kp-pagination-wrap .prev:hover,
+.kp-pagination-wrap .next:hover,
+.kp-pagination-wrap .last:hover {
+  border-color: #cfd4da;
+  background: #f2f4f6;
+  color: #495057;
+}
+
+.kp-pagination-wrap .current {
+  border-color: var(--kp-accent);
+  background: rgba(32, 201, 151, 0.13);
+  color: #0f7b5e;
+  font-weight: 600;
+}
+
+.kp-pagination-wrap .gap {
+  color: var(--kp-muted);
+  padding: 0 0.25rem;
+}
+
 .post-show__image {
   width: min(100%, 420px);
   height: auto;

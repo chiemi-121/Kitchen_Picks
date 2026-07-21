@@ -8,9 +8,7 @@ class TagsController < ApplicationController
 
     keyword = search_condition(@search, @word)
     @tags = Tag
-      .left_outer_joins(:posts)
-      .where("tags.name LIKE :word OR posts.title LIKE :word OR posts.body LIKE :word", word: keyword)
-      .distinct
+      .where("tags.name LIKE :word", word: keyword)
       .order(:name)
   end
 

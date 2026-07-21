@@ -6,7 +6,10 @@ class PostsController < ApplicationController
 
   def index
     @sort = params[:sort] == "rating" ? "rating" : "latest"
-    @posts = Post.includes(:user, :category, :comments, :tags, :favorites).order(posts_order)
+    @posts = Post.includes(:user, :category, :comments, :tags, :favorites)
+                 .order(posts_order)
+                 .page(params[:page])
+                 .per(9)
   end
 
   def show

@@ -32,7 +32,7 @@
 
             <% if user_signed_in? %>
               <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link" %></li>
-              <li class="nav-item"><%= link_to "新規投稿", new_post_path, class: "nav-link" %></li>
+              <li class="nav-item"><%= link_to "新規投稿", login_path, class: "nav-link" %></li>
               <li class="nav-item"><%= link_to "マイページ", mypage_path, class: "nav-link" %></li>
               <li class="nav-item">
                 <%= link_to "Log out",
@@ -55,26 +55,26 @@
     <% if user_signed_in? %>
       <div class="search-strip py-2">
         <div class="container">
-          <%= form_with url: search_path, method: :get, local: true, class: "row g-2 align-items-center" do |f| %>
-            <div class="col-12 col-md-3">
+          <%= form_with url: search_path, method: :get, local: true, class: "row g-2 align-items-center justify-content-center" do |f| %>
+            <div class="col-12 col-md-2">
               <%= f.select :range,
                   [["ユーザー", "User"], ["投稿", "Post"], ["ジャンル", "Tag"]],
                     { selected: params[:range] || "Post" },
                     { class: "form-select form-select-sm" } %>
             </div>
 
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
               <%= f.select :search,
                     [["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]],
                     { selected: params[:search] || "partial" },
                     { class: "form-select form-select-sm" } %>
             </div>
 
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-2">
               <%= f.text_field :word, value: params[:word], placeholder: "キーワードを入力", class: "form-control form-control-sm" %>
             </div>
 
-            <div class="col-12 col-md-2 d-grid">
+            <div class="col-12 col-md-1 d-grid">
               <%= f.submit "検索", class: "btn btn-sm btn-primary" %>
             </div>
           <% end %>

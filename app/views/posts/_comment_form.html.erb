@@ -20,7 +20,7 @@
     </div>
   <% else %>
     <p>
-      <%= link_to "ログイン", login_path %>するとコメントできます。
+      <%= link_to "ログイン", login_path, data: { turbo_frame: "_top" } %>するとコメントできます。
     </p>
   <% end %>
 <% end %>
