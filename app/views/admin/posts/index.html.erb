@@ -36,3 +36,9 @@
     </table>
   </div>
 </div>
+
+<% if @posts.respond_to?(:total_pages) && @posts.total_pages > 1 %>
+  <nav class="kp-pagination-wrap mt-4" aria-label="管理投稿一覧のページネーション">
+    <%= paginate @posts %>
+  </nav>
+<% end %>

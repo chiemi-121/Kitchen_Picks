@@ -2,7 +2,10 @@ class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: [:show, :destroy]
 
   def index
-    @posts = Post.includes(:user, :comments, :category).order(created_at: :desc)
+    @posts = Post.includes(:user, :comments, :category)
+                 .order(created_at: :desc)
+                 .page(params[:page])
+                 .per(15)
   end
 
   def show

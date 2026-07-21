@@ -1,7 +1,16 @@
 <div class="container mt-4">
   <h2>検索結果</h2>
   <p class="text-muted">
-    対象：<%= @range == "User" ? "ユーザー" : "投稿" %> /
+    対象：
+    <% case @range %>
+    <% when "User" %>
+      ユーザー
+    <% when "Tag" %>
+      ジャンル
+    <% else %>
+      投稿
+    <% end %>
+    /
     手法：
     <% case @search %>
     <% when "perfect" %>

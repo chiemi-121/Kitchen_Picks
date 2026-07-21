@@ -25,8 +25,11 @@
 
   <!-- カテゴリー -->
   <div class="mb-3">
-    <%= f.label :category_id, "カテゴリー" %>
-    <%= f.collection_select :category_id, Category.all, :id, :name,
+    <% preferred_category_names = ["時短", "収納", "調理", "片付け"] %>
+    <% categories_by_name = Category.where(name: preferred_category_names).index_by(&:name) %>
+    <% selectable_categories = preferred_category_names.filter_map { |name| categories_by_name[name] } %>
+    <%= f.label :category_id, "カテゴリ（1つ選ぶ）" %>
+    <%= f.collection_select :category_id, selectable_categories, :id, :name,
           prompt: "選択してください",
           class: "form-select" %>
   </div>

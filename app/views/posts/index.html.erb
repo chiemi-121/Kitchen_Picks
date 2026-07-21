@@ -68,7 +68,7 @@
                 <div class="d-flex align-items-center gap-2">
                   <%= render "favorite_button_index", post: post %>
 
-                  <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-secondary btn-sm" %>
+                  <%= link_to "詳細", post_path(post), class: "btn btn-outline-secondary btn-sm" %>
                 </div>
               </div>
             </div>
@@ -78,5 +78,20 @@
     </div>
   <% else %>
     <div class="alert alert-light border mb-0">まだ投稿はありません。</div>
+  <% end %>
+
+  <% if @posts.respond_to?(:total_pages) %>
+    <div class="kp-pagination-meta mt-4">
+      <span>全<%= @posts.total_count %>件</span>
+      <span><%= @posts.current_page %> / <%= @posts.total_pages %>ページ</span>
+    </div>
+
+    <% if @posts.total_pages > 1 %>
+      <nav class="kp-pagination-wrap mt-2" aria-label="投稿一覧のページネーション">
+        <%= paginate @posts %>
+      </nav>
+    <% else %>
+      <div class="kp-pagination-single mt-2" aria-label="投稿一覧のページ情報">1ページのみ</div>
+    <% end %>
   <% end %>
 </div>

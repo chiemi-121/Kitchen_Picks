@@ -35,7 +35,7 @@ if ENV["RAILS_ENV"] == "production"
   bind "unix://#{Dir.getwd}/tmp/sockets/puma.sock"
 else
   # ローカル開発では 3000 番ポートでブラウザ表示
-  port ENV.fetch("PORT") { 3000 }
+  bind "tcp://0.0.0.0:#{ENV.fetch("PORT") { 3000 }}"
 end
 
 # Allow puma to be restarted by `bin/rails restart` command.
