@@ -36,10 +36,39 @@
 
   <!-- タグ（ジャンル） -->
   <div class="mb-3">
+    <% preferred_tag_names = [
+      "電子レンジ",
+      "パスタ",
+      "朝ごはん",
+      "お弁当",
+      "子育て向け",
+      "洗い物が減る",
+      "100均",
+      "便利グッズ",
+      "コスパ",
+      "省スペース",
+      "収納ボックス",
+      "仕切り・トレー",
+      "冷蔵庫収納",
+      "調味料収納",
+      "フライパン",
+      "鍋",
+      "包丁",
+      "まな板",
+      "調理器具",
+      "ボウル",
+      "計量ツール",
+      "お菓子作り",
+      "食洗機対応",
+      "掃除グッズ",
+      "水回り便利グッズ"
+    ] %>
+    <% tags_by_name = Tag.where(name: preferred_tag_names).index_by(&:name) %>
+    <% selectable_tags = preferred_tag_names.filter_map { |name| tags_by_name[name] } %>
     <%= f.label :tag_ids, "ジャンル" %>
 
     <div class="genre-list">
-      <% Tag.all.each do |tag| %>
+      <% selectable_tags.each do |tag| %>
         <label class="genre-item d-block">
           <%= check_box_tag "post[tag_ids][]",
                 tag.id,
