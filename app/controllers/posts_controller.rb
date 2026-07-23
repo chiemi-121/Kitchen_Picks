@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @posts = Post.includes(:user, :category, :comments, :tags, :favorites)
                  .order(posts_order)
                  .page(params[:page])
-                 .per(9)
+                 .per(6)
   end
 
   def show
