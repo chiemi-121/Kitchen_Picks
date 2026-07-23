@@ -14,6 +14,23 @@ categories = [
   "片付け"
 ]
 
+category_fallbacks = {
+  "100均" => "収納",
+  "調理器具" => "調理",
+  "お手入れ" => "片付け"
+}
+
+category_fallbacks.each do |old_name, new_name|
+  old_category = Category.find_by(name: old_name)
+  new_category = Category.find_or_create_by!(name: new_name)
+
+  next unless old_category
+
+  Post.where(category_id: old_category.id).update_all(category_id: new_category.id)
+end
+
+Category.where.not(name: categories).where.not(id: Post.select(:category_id)).find_each(&:destroy)
+
 categories.each do |name|
   Category.find_or_create_by!(name: name)
 end
