@@ -87,3 +87,10 @@ admin.update!(
   password: admin_password,
   password_confirmation: admin_password
 )
+
+# ゲストユーザー
+guest = User.find_or_create_by!(email: "guest@example.com") do |u|
+  u.name     = "ゲストユーザー"
+  u.password = "password"
+  u.password_confirmation = "password"
+end
